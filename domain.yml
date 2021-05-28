@@ -1,0 +1,45 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - train_topics
+  - check_balance
+  - pay_cc
+
+entities:
+  - credit_card
+  - account_type
+  - number
+
+slots:
+  account_type:
+    type: any
+    influence_conversation: false
+  credit_card:
+    type: any
+    influence_conversation: false
+  number:
+    type: any
+    influence_conversation: false
+
+responses:
+  utter_training_topics:
+  - text: "During training we will cover:\n - Intents\n - Entities\n - NLU Pipelines\n - Lookups\n - Synonyms\n
+  - Dialogue Management\n - Rules\n - Slots\n - Forms\n - Custom Actions"
+
+  utter_greet:
+  - text: "Hey! Welcome to your Rasa Training!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
