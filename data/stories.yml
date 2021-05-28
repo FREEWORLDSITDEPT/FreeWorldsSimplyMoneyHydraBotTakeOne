@@ -1,0 +1,46 @@
+version: "2.0"
+
+stories:
+
+- story: welcome user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: get training information
+  steps:
+  - intent: train_topics
+  - action: utter_training_topics
+
+- story: check balance (no account type)
+  steps:
+  - intent: check_balance
+  - action: utter_account_balance
+
+- story: check balance (has account type)
+  steps:
+  - intent: check_balance
+    entities:
+      - account_type
+  - slot_was_set:
+      - account_type: bank
+  - action: utter_account_balance_type
+
+- story: pay_cc (no card specified)
+  steps:
+  - intent: pay_cc
+  - action: utter_make_payment
+
+- story: pay_cc (card specified)
+  steps:
+  - intent: pay_cc
+    entities:
+      - credit_card
+  - slot_was_set:
+      - credit_card: emblem
+  - action: utter_make_payment_for_card
+
+- story: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
