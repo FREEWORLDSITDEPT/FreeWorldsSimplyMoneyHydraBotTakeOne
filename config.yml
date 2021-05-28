@@ -1,0 +1,28 @@
+language: en
+pipeline:
+  - name: ConveRTTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: ConveRTFeaturizer
+  - name: DIETClassifier
+    epochs: 100
+  - name: EntitySynonymMapper
+  - name: DucklingHTTPExtractor
+    url: http://localhost:8000
+    dimensions:
+    - amount-of-money
+    - time
+    - number
+  - name: "SpacyNLP"
+    model: "en_core_web_md"
+  - name: "SpacyEntityExtractor"
+    dimensions: ["PERSON"]
+
+policies:
+- name: FallbackPolicy
+  nlu_threshold: 0.75
+- name: AugmentedMemoizationPolicy
+- name: FormPolicy
+- name: MappingPolicy
+- name: TEDPolicy
+  epochs: 20
